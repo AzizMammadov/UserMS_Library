@@ -23,4 +23,7 @@ public class Role extends BaseEntity {
     @Column(name = "description", length = 255)
     private String description;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+
 }
