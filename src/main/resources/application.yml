@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Library
+
+    datasource:
+      url: jdbc:postgresql://localhost:5432/bookingdb
+      username: aziz
+      password: aziz123!
+
+

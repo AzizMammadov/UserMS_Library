@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role-group-table
+      author: aziz
+      changes:
+        - createTable:
+            tableName: role_group
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: true

@@ -1,0 +1,25 @@
+package com.users.library.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Getter
+@Setter
+@Entity
+@Table(name = "role_group")
+public class RoleGroup {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_grp_seq")
+    @SequenceGenerator(name = "role_grp_seq", sequenceName = "role_grp_sequence", allocationSize = 1)
+    private Long id;
+
+    @Column(name = "name", nullable = false, unique = true, length = 100)
+    private String name;
+
+    @Column(name = "description", length = 255)
+    private String description;
+}

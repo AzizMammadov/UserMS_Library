@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-table
+      author: aziz
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addAutoIncrement:
+            tableName: users
+            columnName: id
+            columnDataType: bigint
+            sequenceName: user_sequence
+            startWith: 1
+            incrementBy: 1
+  - changeSet:
+      id: create-role-table
+      author: aziz
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addAutoIncrement:
+            tableName: roles
+            columnName: id
+            columnDataType: bigint
+            sequenceName: role_sequence
+            startWith: 1
+            incrementBy: 1
+  - changeSet:
+      id: create-role-group-table
+      author: aziz
+      changes:
+        - createTable:
+            tableName: role_group
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addAutoIncrement:
+            tableName: role_group
+            columnName: id
+            columnDataType: bigint
+            sequenceName: role_grp_sequence
+            startWith: 1
+            incrementBy: 1
