@@ -37,8 +37,13 @@ public class Role extends BaseEntity {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_group_id")
-    private RoleGroup roleGroup;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "role_role_group",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_group_id")
+    )
+    private Set<RoleGroup> roleGroups = new HashSet<>();
+
 
 }

@@ -1,18 +1,18 @@
 package com.users.library.entity;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.sound.midi.Sequence;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"roles", "roleGroups"})
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -40,12 +40,23 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
-            CascadeType.PERSIST,
+
             CascadeType.REFRESH
     })
+    /*  CascadeType.PERSIST, Əgər User obyektini save etdikdə Role və ya RoleGroup-lar da
+    save olunacaqsa və bunlar əvvəlcədən mövcuddursa, təkrar yaratma problemi yaşana bilər.*/
     @JoinTable ( name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "user_role_group",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_group_id")
+    )
+    private Set<RoleGroup> roleGroups = new HashSet<>();
+
 }
 

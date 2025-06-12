@@ -24,3 +24,15 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: true
+
+  - changeSet:
+      id: add-fk-role-role_group
+      author: aziz
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: role
+            baseColumnNames: role_group_id
+            referencedTableName: role_group
+            referencedColumnNames: id
+            constraintName: fk_role_rolegroup
+            onDelete: CASCADE

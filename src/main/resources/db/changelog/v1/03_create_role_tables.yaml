@@ -24,3 +24,16 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: true
+
+  - changeSet:
+      id: add-role_group_id-column-to-role
+      author: aziz
+      changes:
+        - addColumn:
+             tableName: role
+             columns:
+               - column:
+                   name: role_group_id
+                   type: bigint
+                   constraints:
+                   nullable: false

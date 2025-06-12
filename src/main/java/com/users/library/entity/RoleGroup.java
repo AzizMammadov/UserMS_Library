@@ -25,6 +25,11 @@ public class RoleGroup {
     @Column(name = "description", length = 255)
     private String description;
 
-    @OneToMany(mappedBy = "roleGroup")
+    @ManyToMany(mappedBy = "roleGroups", fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(mappedBy = "roleGroups", fetch = FetchType.LAZY)
+    private Set<User> users = new HashSet<>();
+
+
 }
