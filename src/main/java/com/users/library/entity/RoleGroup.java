@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import java.util.Set;
+import java.util.HashSet;
 
 @ToString
 @Getter
@@ -22,4 +24,7 @@ public class RoleGroup {
 
     @Column(name = "description", length = 255)
     private String description;
+
+    @OneToMany(mappedBy = "roleGroup")
+    private Set<Role> roles = new HashSet<>();
 }
