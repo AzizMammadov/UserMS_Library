@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role-role_group-join-table
+      author: aziz
+      changes:
+        - createTable:
+            tableName: role_role_group
+            columns:
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_group_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: role_id, role_group_id
+            tableName: role_role_group
+            constraintName: pk_role_role_group
+        - addForeignKeyConstraint:
+            baseTableName: role_role_group
+            baseColumnNames: role_id
+            referencedTableName: role
+            referencedColumnNames: id
+            constraintName: fk_role_role_group_role
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: role_role_group
+            baseColumnNames: role_group_id
+            referencedTableName: role_group
+            referencedColumnNames: id
+            constraintName: fk_role_role_group_role_group
+            onDelete: CASCADE
