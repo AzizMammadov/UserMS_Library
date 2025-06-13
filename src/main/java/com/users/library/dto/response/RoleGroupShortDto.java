@@ -1,4 +1,4 @@
-package com.users.library.dto;
+package com.users.library.dto.response;
 
 public class RoleGroupShortDto {
 
