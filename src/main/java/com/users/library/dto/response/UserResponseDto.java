@@ -2,8 +2,12 @@ package com.users.library.dto.response;
 
 
 
-import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Set;
+@Getter
+@Setter
 public class UserResponseDto {
     private Long id;
     private String username;
