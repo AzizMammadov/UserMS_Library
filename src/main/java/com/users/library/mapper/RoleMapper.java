@@ -7,14 +7,16 @@ import com.users.library.dto.response.RoleShortDto;
 import com.users.library.entity.Role;
 import com.users.library.entity.RoleGroup;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class RoleMapper {
 
-
-    public static Role toEntity(RoleRequestDto dto, Set<RoleGroup> roleGroups) {
+    public Role toEntity(RoleRequestDto dto, Set<RoleGroup> roleGroups) {
         if (dto == null) return null;
 
         Role role = new Role();
@@ -25,8 +27,7 @@ public class RoleMapper {
         return role;
     }
 
-
-    public static RoleResponseDto toDto(Role role) {
+    public RoleResponseDto toDto(Role role) {
         if (role == null) return null;
 
         RoleResponseDto dto = new RoleResponseDto();
@@ -37,7 +38,7 @@ public class RoleMapper {
         dto.setRoleGroups(
                 role.getRoleGroups() != null
                         ? role.getRoleGroups().stream()
-                        .map(RoleMapper::mapToRoleGroupShortDto)
+                        .map(this::mapToRoleGroupShortDto)
                         .collect(Collectors.toSet())
                         : new HashSet<>()
         );
@@ -45,8 +46,7 @@ public class RoleMapper {
         return dto;
     }
 
-
-    public static RoleShortDto toShortDto(Role role) {
+    public RoleShortDto toShortDto(Role role) {
         if (role == null) return null;
 
         RoleShortDto dto = new RoleShortDto();
@@ -56,8 +56,7 @@ public class RoleMapper {
         return dto;
     }
 
-
-    private static RoleGroupShortDto mapToRoleGroupShortDto(RoleGroup group) {
+    private RoleGroupShortDto mapToRoleGroupShortDto(RoleGroup group) {
         if (group == null) return null;
 
         RoleGroupShortDto dto = new RoleGroupShortDto();
