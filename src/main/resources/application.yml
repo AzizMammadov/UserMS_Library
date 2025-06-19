@@ -2,9 +2,7 @@ spring:
   application:
     name: Library
 
-    datasource:
-      url: jdbc:postgresql://localhost:5432/postgres-db
-      username: aziz
-      password: aziz123!
-
-
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookingdb
+    username: aziz
+    password: aziz123!
