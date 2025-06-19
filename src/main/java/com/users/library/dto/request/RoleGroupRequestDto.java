@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 public class RoleGroupRequestDto {
@@ -15,5 +17,8 @@ public class RoleGroupRequestDto {
 
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
+
+    private Set<Long> roleIds;
+
 }
 

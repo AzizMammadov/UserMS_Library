@@ -1,14 +1,18 @@
 package com.users.library.service;
 
+import java.util.Set;
 import com.users.library.dto.request.RoleRequestDto;
 import com.users.library.dto.response.RoleResponseDto;
 import com.users.library.entity.Role;
 import com.users.library.mapper.RoleMapper;
+import com.users.library.repository.RoleGroupRepository;
 import com.users.library.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.users.library.entity.RoleGroup;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +23,25 @@ public class RoleService implements RoleServiceInterface {
 
     private final RoleRepository roleRepository;
     private final RoleMapper roleMapper;
+    private final RoleGroupRepository roleGroupRepository;
 
-    @Override
+    @Transactional
     public RoleResponseDto create(RoleRequestDto dto) {
-        Role role = roleMapper.toEntity(dto);
-        Role saved = roleRepository.save(role);
-        return roleMapper.toDto(saved);
+        // roleGroupIds varsa, RoleGroup-ları tap
+        Set<RoleGroup> roleGroups = new HashSet<>();
+        if (dto.getRoleGroupIds() != null && !dto.getRoleGroupIds().isEmpty()) {
+            roleGroups = roleGroupRepository.findAllById(dto.getRoleGroupIds())
+                    .stream().collect(Collectors.toSet());
+        }
+
+        // dto + roleGroups ilə Role entity yarat
+        Role role = roleMapper.toEntity(dto, roleGroups);
+
+        // DB-yə yaz
+        role = roleRepository.save(role);
+
+        // Entity → DTO
+        return roleMapper.toDto(role);
     }
 
     @Override

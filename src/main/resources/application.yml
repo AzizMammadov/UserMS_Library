@@ -3,7 +3,7 @@ spring:
     name: Library
 
     datasource:
-      url: jdbc:postgresql://localhost:5432/bookingdb
+      url: jdbc:postgresql://localhost:5432/postgres-db
       username: aziz
       password: aziz123!
 
