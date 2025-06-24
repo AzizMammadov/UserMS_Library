@@ -43,6 +43,7 @@ public class UserMapper implements UserMapperInterface {
         dto.setEmail(user.getEmail());
         dto.setFullName(user.getFullName());
         dto.setActive(user.isActive());
+        dto.setDeleted(user.isDeleted());
 
         dto.setRoles(user.getRoles() != null
                 ? user.getRoles().stream().map(this::mapToRoleShortDto).collect(Collectors.toSet())

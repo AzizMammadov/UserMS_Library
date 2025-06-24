@@ -9,7 +9,11 @@ import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
+@Where(clause = "deleted = false")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
 @Getter
 @Setter
 @ToString(exclude = {"roles", "roleGroups"})
@@ -36,6 +40,9 @@ public class User extends BaseEntity {
 
     @Column(name = "is_active", nullable = false)
     private boolean active = true;
+
+    @Column(name = "deleted", nullable = false)
+    private boolean deleted = false;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH,

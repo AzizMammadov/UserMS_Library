@@ -114,9 +114,9 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public void delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found with id: " + id);
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+       // user.s  // soft delete
+        userRepository.save(user);
     }
 }

@@ -13,6 +13,7 @@ public class UserResponseDto {
     private String username;
     private String email;
     private String fullName;
+    private boolean deleted;
     private boolean active;
     private Set<RoleShortDto> roles;
     private Set<RoleGroupShortDto> roleGroups;
